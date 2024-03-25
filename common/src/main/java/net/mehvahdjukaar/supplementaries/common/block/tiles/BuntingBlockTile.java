@@ -11,7 +11,6 @@ import net.mehvahdjukaar.supplementaries.common.block.ModBlockProperties;
 import net.mehvahdjukaar.supplementaries.common.block.blocks.BuntingBlock;
 import net.mehvahdjukaar.supplementaries.common.items.BuntingItem;
 import net.mehvahdjukaar.supplementaries.configs.ClientConfigs;
-import net.mehvahdjukaar.supplementaries.reg.ModRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -35,7 +34,7 @@ public class BuntingBlockTile extends DynamicRenderedItemDisplayTile {
     private final Map<Direction, DyeColor> buntings = new EnumMap<>(Direction.class);
 
     public BuntingBlockTile(BlockPos pos, BlockState state) {
-        super(ModRegistry.BUNTING_TILE.get(), pos, state, 4);
+        super(null, pos, state, 4);
     }
 
     @ForgeOverride

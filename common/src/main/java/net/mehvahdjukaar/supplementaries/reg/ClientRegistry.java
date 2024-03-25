@@ -33,7 +33,6 @@ import net.mehvahdjukaar.supplementaries.client.tooltip.*;
 import net.mehvahdjukaar.supplementaries.common.block.placeable_book.PlaceableBookManager;
 import net.mehvahdjukaar.supplementaries.common.block.tiles.TrappedPresentBlockTile;
 import net.mehvahdjukaar.supplementaries.common.items.AntiqueInkItem;
-import net.mehvahdjukaar.supplementaries.common.items.BuntingItem;
 import net.mehvahdjukaar.supplementaries.common.items.SlingshotItem;
 import net.mehvahdjukaar.supplementaries.common.items.tooltip_components.BannerPatternTooltip;
 import net.mehvahdjukaar.supplementaries.common.items.tooltip_components.PaintingTooltip;
@@ -161,7 +160,6 @@ public class ClientRegistry {
         MenuScreens.register(ModMenuTypes.RED_MERCHANT.get(), RedMerchantScreen::new);
 
         ClientHelper.registerRenderType(ModRegistry.WIND_VANE.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModRegistry.BUNTING_BLOCK.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModRegistry.BOOK_PILE.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModRegistry.BOOK_PILE_H.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModRegistry.GLOBE.get(), RenderType.cutout());
@@ -201,13 +199,10 @@ public class ClientRegistry {
         ClientHelper.registerRenderType(ModRegistry.IRON_GATE.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModRegistry.GOLD_GATE.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModRegistry.GUNPOWDER_BLOCK.get(), RenderType.cutout());
-        ClientHelper.registerRenderType(ModRegistry.CANNON.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModRegistry.ROPE_KNOT.get(), RenderType.cutout());
         ClientHelper.registerRenderType(ModRegistry.CRYSTAL_DISPLAY.get(), RenderType.cutout());
         ModRegistry.CANDLE_HOLDERS.values().forEach(c -> ClientHelper.registerRenderType(c.get(), RenderType.cutout()));
 
-        ClientHelper.registerRenderType(ModFluids.LUMISENE_BLOCK.get(), RenderType.cutout());
-        ClientHelper.registerFluidRenderType(ModFluids.LUMISENE_FLUID.get(), RenderType.translucent());
 
         ItemProperties.register(Items.CROSSBOW, Supplementaries.res("rope_arrow"),
                 new CrossbowProperty(ModRegistry.ROPE_ARROW_ITEM.get()));
@@ -249,8 +244,6 @@ public class ClientRegistry {
         ItemProperties.register(ModRegistry.GLOBE_ITEM.get(), Supplementaries.res("type"),
                 new GlobeProperty());
 
-        ItemProperties.register(ModRegistry.BUNTING.get(), Supplementaries.res("dye"),
-                (stack, world, entity, s) -> BuntingItem.getColor(stack).getId()/100f);
 
         //ItemModelsProperties.register(ModRegistry.SPEEDOMETER_ITEM.get(), new ResourceLocation("speed"),
         //       new SpeedometerItem.SpeedometerItemProperty());
@@ -374,8 +367,6 @@ public class ClientRegistry {
         event.register(ModRegistry.JAR_BOAT_TILE.get(), JarBoatTileRenderer::new);
         event.register(ModRegistry.BUBBLE_BLOCK_TILE.get(), BubbleBlockTileRenderer::new);
         event.register(ModRegistry.ENDERMAN_SKULL_TILE.get(), EndermanSkullBlockTileRenderer::new);
-        event.register(ModRegistry.CANNON_TILE.get(), CannonBlockTileRenderer::new);
-        event.register(ModRegistry.BUNTING_TILE.get(), BuntingBlockTileRenderer::new);
     }
 
     @EventCalled

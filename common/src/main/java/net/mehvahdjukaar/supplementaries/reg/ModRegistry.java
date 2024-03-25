@@ -376,6 +376,7 @@ public class ModRegistry {
             ROPE_KNOT_NAME, () -> PlatHelper.newBlockEntityType(
                     RopeKnotBlockTile::new, ROPE_KNOT.get()));
 
+    /*
     //cannon
     public static final Supplier<Item> BUNTING = regItem(BUNTING_NAME, () -> new BuntingItem(new Item.Properties()));
     public static final Supplier<BuntingBlock> BUNTING_BLOCK = regBlock("rope_buntings", () -> new BuntingBlock(
@@ -383,7 +384,7 @@ public class ModRegistry {
 
     public static final Supplier<BlockEntityType<BuntingBlockTile>> BUNTING_TILE = regTile(
             "rope_buntings", () -> PlatHelper.newBlockEntityType(
-                    BuntingBlockTile::new, BUNTING_BLOCK.get()));
+                    BuntingBlockTile::new, BUNTING_BLOCK.get()));*/
 
     //spikes
     public static final Supplier<Block> BAMBOO_SPIKES = regBlock(BAMBOO_SPIKES_NAME, () -> new BambooSpikesBlock(
@@ -957,6 +958,7 @@ public class ModRegistry {
             BOOK_PILE_NAME, () -> PlatHelper.newBlockEntityType(
                     BookPileBlockTile::new, BOOK_PILE.get(), BOOK_PILE_H.get()));
 
+    /*
     //cannon
     public static final Supplier<Block> CANNON = regWithItem(CANNON_NAME, () -> new CannonBlock(
             BlockBehaviour.Properties.copy(Blocks.ANVIL)
@@ -968,7 +970,7 @@ public class ModRegistry {
 
     public static final Supplier<Block> CANNONBALL = regWithItem(CANNONBALL_NAME, () -> new CannonballBlock(
             BlockBehaviour.Properties.copy(Blocks.ANVIL)
-    ));
+    ));*/
 
     //urn
     public static final Supplier<Block> URN = regWithItem(URN_NAME, () -> new UrnBlock(

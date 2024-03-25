@@ -4,7 +4,6 @@ import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.mehvahdjukaar.supplementaries.common.utils.BlockUtil;
 import net.mehvahdjukaar.supplementaries.integration.CompatHandler;
 import net.mehvahdjukaar.supplementaries.integration.FlanCompat;
-import net.mehvahdjukaar.supplementaries.reg.ModFluids;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -173,14 +172,7 @@ public class InteractEventsHandler {
             }
         }
 
-        // lightable fluid hacks since fluids have no collision
-        if (canAlter) {
-            BlockState aboveState = level.getBlockState(pos.above());
-            if (aboveState.getFluidState().is(ModFluids.LUMISENE_FLUID.get())) {
-                return aboveState.use(level, player, hand, new BlockHitResult(hit.getLocation(),
-                        hit.getDirection(), pos.above(), false));
-            }
-        }
+
 
         return InteractionResult.PASS;
         //not sure if this is needed

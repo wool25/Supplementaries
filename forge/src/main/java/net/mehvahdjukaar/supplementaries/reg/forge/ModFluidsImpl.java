@@ -6,7 +6,6 @@ import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.supplementaries.Supplementaries;
 import net.mehvahdjukaar.supplementaries.common.fluids.FiniteFluid;
 import net.mehvahdjukaar.supplementaries.common.items.forge.FiniteFluidBucket;
-import net.mehvahdjukaar.supplementaries.reg.ModFluids;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -39,7 +38,7 @@ import java.util.function.Supplier;
 public class ModFluidsImpl {
 
     public static BucketItem createLumiseneBucket() {
-        return new FiniteFluidBucket(ModFluids.LUMISENE_FLUID, new Item.Properties().stacksTo(1)
+        return new FiniteFluidBucket(null, new Item.Properties().stacksTo(1)
                 .craftRemainder(Items.BUCKET));
     }
 
@@ -128,7 +127,7 @@ public class ModFluidsImpl {
 
     public static class LumiseneFluid extends FiniteFluid {
         public LumiseneFluid() {
-            super(16, ModFluids.LUMISENE_BLOCK, ModFluids.LUMISENE_BUCKET);
+            super(16, null, null);
         }
 
         @Override
@@ -139,12 +138,7 @@ public class ModFluidsImpl {
 
     public static void messWithFluidH(BlockAndTintGetter level, Fluid fluid, BlockPos pos, BlockState blockState, FluidState fluidState, CallbackInfoReturnable<Float> cir) {
         //  if(fluidState.isEmpty())cir.setReturnValue(1f);
-        if (fluid.isSame(fluidState.getType())) {
-            BlockState aboveState = level.getBlockState(pos.above());
-            if (aboveState.getFluidState().is(ModFluids.LUMISENE_FLUID.get())) {
-                cir.setReturnValue(1f);
-            }
-        }
+
     }
 
     public static void messWithAvH(BlockAndTintGetter level, Fluid fluid, float g, float h, float i, BlockPos pos, CallbackInfoReturnable<Float> cir) {

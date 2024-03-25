@@ -81,7 +81,6 @@ public class ModSetup {
 
     private static void registerFabricFlammable() {
         RegHelper.registerBlockFlammability(ModRegistry.ROPE.get(), 60, 100);
-        RegHelper.registerBlockFlammability(ModRegistry.BUNTING_BLOCK.get(), 60, 100);
     }
 
     private static void registerMobFoods() {

@@ -1,3 +1,5 @@
+- blackboards now have an undo button
+- crystal displays can be chained (up to 2)
 - fixed faucet fluid dupe
 - fixed blackboard item renderer
 - improved quiver logic to use mouse sensitivity
@@ -5,8 +7,6 @@
 - bomb smoke particles were changed
 - fixed some issues with jars and goblet fluids
 - wind vane uses an entity model now with proper shading
-- crystal displays can be chained
-- book pile generation fix
-- quiver pick up arrow fix
-- quiver can now have arrows be inserted from off hand
-- blackboard undo button
+- fixed a rare issue with book piles generation in structures
+- quiver will now pickup all arrows correcctly
+- quiver can now have arrows be inserted from off hand by clicking

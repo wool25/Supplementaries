@@ -11,7 +11,6 @@ import net.mehvahdjukaar.supplementaries.client.cannon.CannonController;
 import net.mehvahdjukaar.supplementaries.common.entities.SlingshotProjectileEntity;
 import net.mehvahdjukaar.supplementaries.common.inventories.CannonContainerMenu;
 import net.mehvahdjukaar.supplementaries.reg.ModParticles;
-import net.mehvahdjukaar.supplementaries.reg.ModRegistry;
 import net.mehvahdjukaar.supplementaries.reg.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -61,7 +60,7 @@ public class CannonBlockTile extends OpeneableContainerBlockEntity {
     private float projectileGravity = 0f;
 
     public CannonBlockTile(BlockPos pos, BlockState blockState) {
-        super(ModRegistry.CANNON_TILE.get(), pos, blockState, 2);
+        super(null, pos, blockState, 2);
     }
 
     @Override

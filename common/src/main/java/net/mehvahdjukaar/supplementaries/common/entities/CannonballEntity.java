@@ -1,7 +1,6 @@
 package net.mehvahdjukaar.supplementaries.common.entities;
 
 import net.mehvahdjukaar.moonlight.api.entity.ImprovedProjectileEntity;
-import net.mehvahdjukaar.supplementaries.reg.ModRegistry;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
@@ -17,7 +16,7 @@ public class CannonballEntity extends ImprovedProjectileEntity {
 
     @Override
     protected Item getDefaultItem() {
-        return ModRegistry.CANNONBALL.get().asItem();
+        return null;
     }
 
     @Override

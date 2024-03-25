@@ -290,7 +290,7 @@ public class BuntingBlock extends AbstractRopeBlock implements EntityBlock, IRot
     }
 
     public static BlockState fromRope(BlockState state) {
-        BuntingBlock block = ModRegistry.BUNTING_BLOCK.get();
+        BuntingBlock block = null;
         BlockState s = block.withPropertiesOf(state);
         for (Direction dir : Direction.Plane.HORIZONTAL) {
             s = block.setConnection(dir, s, ((RopeBlock) state.getBlock()).hasConnection(dir, state));
