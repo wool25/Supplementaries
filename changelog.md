@@ -1,12 +1,2 @@
-- blackboards now have an undo button
-- crystal displays can be chained (up to 2)
-- fixed faucet fluid dupe
-- fixed blackboard item renderer
-- improved quiver logic to use mouse sensitivity
-- improved bomb particle emission to be bigger, centered on a circle
-- bomb smoke particles were changed
-- fixed some issues with jars and goblet fluids
-- wind vane uses an entity model now with proper shading
-- fixed a rare issue with book piles generation in structures
-- quiver will now pickup all arrows correcctly
-- quiver can now have arrows be inserted from off hand by clicking
+- should work with Farmers Delight Refabricated 2.0.0
+- Get it here https://www.curseforge.com/minecraft/mc-mods/farmers-delight-refabricated
