@@ -1,2 +1,2 @@
-- should work with Farmers Delight Refabricated 2.0.0
-- Get it here https://www.curseforge.com/minecraft/mc-mods/farmers-delight-refabricated
+fixed a rare crash
+fixed create integration for present recipient display link stuff
