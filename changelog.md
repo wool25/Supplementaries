@@ -1,2 +1,2 @@
-fixed a rare crash
-fixed create integration for present recipient display link stuff
+updated Flan integration
+walking on flint blocks with iron boots will make sparks

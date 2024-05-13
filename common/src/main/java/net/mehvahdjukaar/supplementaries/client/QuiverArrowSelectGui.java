@@ -115,6 +115,14 @@ public abstract class QuiverArrowSelectGui extends Gui {
         return false;
     }
 
+    @EventCalled
+    public static boolean onMouseScrolled(double scrollDelta) {
+        Player player = Minecraft.getInstance().player;
+        ModNetwork.CHANNEL.sendToServer(new ServerBoundCycleQuiverPacket(
+                scrollDelta > 0 ? -1 : 1, getQuiverSlot(player)));
+        return true;
+    }
+
     private void renderSlot(GuiGraphics graphics, int pX, int pY, ItemStack pStack, int seed) {
         if (!pStack.isEmpty()) {
             graphics.renderItem(pStack, pX, pY, seed);
