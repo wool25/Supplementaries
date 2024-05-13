@@ -13,6 +13,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
@@ -81,6 +85,20 @@ public class FlintBlock extends Block implements IPistonMotionReact {
                     (direction) -> direction, (direction, direction2) -> {
         throw new IllegalArgumentException("Duplicate keys");
     }, Long2ObjectOpenHashMap::new));
+
+
+    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+        if (!level.isClientSide && entity instanceof LivingEntity le &&
+                !le.isSteppingCarefully() && le.isSprinting() && le.tickCount % 2 == 0 &&
+                le.getItemBySlot(EquipmentSlot.FEET).is(Items.IRON_BOOTS)) {
+            if (level.getBlockState(pos.above()).isAir()) {
+                //check if entity is moving
+                ignitePosition(level, pos.above(), true);
+            }
+        }
+
+        super.stepOn(level, pos, state, entity);
+    }
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block oldBlock, BlockPos targetPos, boolean isMoving) {
