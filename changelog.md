@@ -1,4 +1,8 @@
-fixed a fluid dupe with faucet
-improved bellows collision
-
-fixed sign post text color
+- blackboard colo gui
+- fixed a fluid dupe
+- fixed bubble block renderer
+- fixed enderman haed renderer
+- improved bellows collision logic
+- fixed some inventories in spectator
+- fixed a faucet fluid dupe
+- added more tags for gunpowde light up stuff
