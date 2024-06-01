@@ -279,10 +279,11 @@ public class ModCreativeTabs {
                 ModRegistry.FLINT_BLOCK);
 
 
-        after(e, ItemTags.BANNERS, CreativeModeTabs.COLORED_BLOCKS,
-                ModConstants.BUNTING_NAME,
-                Arrays.stream(DyeColor.values()).map(d -> (Supplier<Item>)
-                        () -> BuntingItem.getColored(d).getItem()).toArray(Supplier[]::new));
+        if (CommonConfigs.isEnabled(ModConstants.BUNTING_NAME)) {
+            e.addAfter(CreativeModeTabs.COLORED_BLOCKS, i -> i.is(ItemTags.BANNERS),
+                    Arrays.stream(DyeColor.values()).map(BuntingItem::getColored)
+                            .toArray(ItemStack[]::new));
+        }
 
         after(e, ItemTags.BANNERS, CreativeModeTabs.FUNCTIONAL_BLOCKS,
                 ModConstants.FLAG_NAME,
