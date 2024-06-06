@@ -7,7 +7,6 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.supplementaries.Supplementaries;
-import net.mehvahdjukaar.supplementaries.client.renderers.items.EndermanHeadItemRenderer;
 import net.mehvahdjukaar.supplementaries.common.block.blocks.*;
 import net.mehvahdjukaar.supplementaries.common.block.tiles.*;
 import net.mehvahdjukaar.supplementaries.common.entities.BombEntity;
@@ -959,7 +958,6 @@ public class ModRegistry {
             BOOK_PILE_NAME, () -> PlatHelper.newBlockEntityType(
                     BookPileBlockTile::new, BOOK_PILE.get(), BOOK_PILE_H.get()));
 
-    EndermanHeadItemRenderer
     /*
     //cannon
     public static final Supplier<Block> CANNON = regWithItem(CANNON_NAME, () -> new CannonBlock(

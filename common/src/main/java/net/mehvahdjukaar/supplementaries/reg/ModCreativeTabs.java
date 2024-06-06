@@ -107,10 +107,6 @@ public class ModCreativeTabs {
                 ModConstants.SCONCE_NAME,
                 sconces.toArray(Supplier[]::new));
 
-        before(e, Items.CAMPFIRE, CreativeModeTabs.FUNCTIONAL_BLOCKS,
-                ModConstants.FIRE_PIT_NAME,
-                ModRegistry.FIRE_PIT);
-
         before(e, Items.CHAIN, CreativeModeTabs.FUNCTIONAL_BLOCKS,
                 ModConstants.ROPE_NAME,
                 ModRegistry.ROPE);

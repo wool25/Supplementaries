@@ -10,7 +10,6 @@ import net.mehvahdjukaar.supplementaries.Supplementaries;
 import net.mehvahdjukaar.supplementaries.common.block.ModBlockProperties;
 import net.mehvahdjukaar.supplementaries.common.block.blocks.BuntingBlock;
 import net.mehvahdjukaar.supplementaries.common.items.BuntingItem;
-import net.mehvahdjukaar.supplementaries.configs.ClientConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -106,7 +105,7 @@ public class BuntingBlockTile extends DynamicRenderedItemDisplayTile {
 
     @Override
     public boolean isNeverFancy() {
-        return ClientConfigs.Blocks.FAST_BUNTINGS.get();
+        return false;
     }
 
     @Override
