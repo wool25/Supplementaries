@@ -7,6 +7,7 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.set.wood.WoodType;
 import net.mehvahdjukaar.supplementaries.Supplementaries;
+import net.mehvahdjukaar.supplementaries.client.renderers.items.EndermanHeadItemRenderer;
 import net.mehvahdjukaar.supplementaries.common.block.blocks.*;
 import net.mehvahdjukaar.supplementaries.common.block.tiles.*;
 import net.mehvahdjukaar.supplementaries.common.entities.BombEntity;
@@ -942,10 +943,6 @@ public class ModRegistry {
     public static final Supplier<Block> GUNPOWDER_BLOCK = regWithItem(GUNPOWDER_BLOCK_NAME, () -> new GunpowderBlock(
             BlockBehaviour.Properties.copy(Blocks.REDSTONE_WIRE).sound(SoundType.SAND)));
 
-    //fire pit
-    public static final Supplier<Block> FIRE_PIT = regWithItem(FIRE_PIT_NAME, () -> new FirePitBlock(1,
-            BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.COPPER)));
-
     //placeable book
     public static final Supplier<Block> BOOK_PILE = regBlock(BOOK_PILE_NAME, () -> new BookPileBlock(
             BlockBehaviour.Properties.of()
@@ -962,6 +959,7 @@ public class ModRegistry {
             BOOK_PILE_NAME, () -> PlatHelper.newBlockEntityType(
                     BookPileBlockTile::new, BOOK_PILE.get(), BOOK_PILE_H.get()));
 
+    EndermanHeadItemRenderer
     /*
     //cannon
     public static final Supplier<Block> CANNON = regWithItem(CANNON_NAME, () -> new CannonBlock(

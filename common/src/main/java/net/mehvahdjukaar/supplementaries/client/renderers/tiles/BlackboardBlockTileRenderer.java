@@ -90,7 +90,6 @@ public class BlackboardBlockTileRenderer implements BlockEntityRenderer<Blackboa
             return;
         }
 
-
         if (LOD.isOutOfFocus(cameraPos, pos, yaw, 0, dir, WIDTH / 16f)) return;
 
         HitResult hit = mc.hitResult;

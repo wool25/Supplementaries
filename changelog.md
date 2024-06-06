@@ -1,5 +1,4 @@
 - added color variable selector gui
-- fixed a fluid dupe
 - fixed bubble block renderer
 - fixed enderman haed renderer
 - improved bellows collision logic
