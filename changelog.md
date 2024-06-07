@@ -1,7 +1,1 @@
-- added blackboard color selector gui
-- fixed bubble block renderer
-- fixed enderman head renderer
-- improved bellows collision logic
-- fixed some inventories in spectator
-- fixed a faucet fluid dupe
-- added more tags for gunpowder light up stuff
+fixed sack inventory

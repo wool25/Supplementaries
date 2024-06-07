@@ -12,8 +12,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -22,6 +22,7 @@ import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -30,6 +31,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -49,7 +51,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SackBlock extends FallingBlock implements EntityBlock {
+public class SackBlock extends FallingBlock implements EntityBlock, SimpleWaterloggedBlock {
 
     public static final List<Block> SACK_BLOCKS = new ArrayList<>();
 
@@ -84,6 +86,7 @@ public class SackBlock extends FallingBlock implements EntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(OPEN, WATERLOGGED);
     }
 
@@ -146,9 +149,10 @@ public class SackBlock extends FallingBlock implements EntityBlock {
         } else {
             if (worldIn.getBlockEntity(pos) instanceof SackBlockTile tile) {
 
-                PlatHelper.openCustomMenu((ServerPlayer) player, tile, p->{
+                PlatHelper.openCustomMenu((ServerPlayer) player, tile, p -> {
                     p.writeBoolean(true);
                     p.writeBlockPos(pos);
+                    p.writeInt(tile.getContainerSize());
                 });
                 PiglinAi.angerNearbyPiglins(player, true);
 
@@ -164,15 +168,8 @@ public class SackBlock extends FallingBlock implements EntityBlock {
     public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
         if (worldIn.getBlockEntity(pos) instanceof SackBlockTile tile) {
             if (!worldIn.isClientSide && player.isCreative()) {
-                CompoundTag compoundTag = tile.saveWithoutMetadata();
                 ItemStack itemstack = new ItemStack(this);
-                if (!compoundTag.isEmpty()) {
-                    itemstack.addTagElement("BlockEntityTag", compoundTag);
-                }
-
-                if (tile.hasCustomName()) {
-                    itemstack.setHoverName(tile.getCustomName());
-                }
+                saveTileToItem(tile, itemstack);
 
                 ItemEntity itementity = new ItemEntity(worldIn, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, itemstack);
                 itementity.setDefaultPickUpDelay();
@@ -182,6 +179,17 @@ public class SackBlock extends FallingBlock implements EntityBlock {
             }
         }
         super.playerWillDestroy(worldIn, pos, state, player);
+    }
+
+    private static void saveTileToItem(SackBlockTile tile, ItemStack itemstack) {
+        CompoundTag compoundTag = tile.saveWithoutMetadata();
+        if (!compoundTag.isEmpty()) {
+            itemstack.addTagElement("BlockEntityTag", compoundTag);
+        }
+
+        if (tile.hasCustomName()) {
+            itemstack.setHoverName(tile.getCustomName());
+        }
     }
 
     @Override
@@ -200,10 +208,7 @@ public class SackBlock extends FallingBlock implements EntityBlock {
     public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
         ItemStack itemstack = super.getCloneItemStack(level, pos, state);
         if (level.getBlockEntity(pos) instanceof SackBlockTile tile) {
-            CompoundTag compoundTag = tile.saveWithoutMetadata();
-            if (!compoundTag.isEmpty()) {
-                itemstack.addTagElement("BlockEntityTag", compoundTag);
-            }
+            saveTileToItem(tile, itemstack);
         }
         return itemstack;
     }
@@ -239,19 +244,8 @@ public class SackBlock extends FallingBlock implements EntityBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
-        if (worldIn.getBlockEntity(pos) instanceof SackBlockTile tile) {
-            int i = 0;
-            float f = 0.0F;
-            int slots = SackBlockTile.getUnlockedSlots();
-            for (int j = 0; j < slots; ++j) {
-                ItemStack itemstack = tile.getItem(j);
-                if (!itemstack.isEmpty()) {
-                    f += itemstack.getCount() / (float) Math.min(tile.getMaxStackSize(), itemstack.getMaxStackSize());
-                    ++i;
-                }
-            }
-            f = f / slots;
-            return Mth.floor(f * 14.0F) + (i > 0 ? 1 : 0);
+        if (worldIn.getBlockEntity(pos) instanceof Container tile) {
+            return AbstractContainerMenu.getRedstoneSignalFromContainer(tile);
         }
         return 0;
     }
