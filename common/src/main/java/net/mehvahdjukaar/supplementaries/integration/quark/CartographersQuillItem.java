@@ -54,7 +54,7 @@ public class CartographersQuillItem extends PathfindersQuillItem {
     public static final String TAG_SEARCH_RADIUS = "maxSearchRadius";
     public static final String TAG_ZOOM = "zoomLevel";
     public static final String TAG_DECORATION = "decoration";
-    public static final String TAG_NAME = "decoration";
+    public static final String TAG_NAME = "name";
 
     protected static final String TAG_RADIUS = "searchRadius";
     protected static final String TAG_POS_INDEX = "searchIndex";
@@ -127,8 +127,12 @@ public class CartographersQuillItem extends PathfindersQuillItem {
     @Override
     public ItemStack createMap(ServerLevel level, BlockPos targetPos, ResourceLocation structure, ItemStack original) {
         CompoundTag tag = original.getOrCreateTag();
-        return AdventurerMapsHandler.createStructureMap(level, targetPos, getStructureHolder(level, structure),
+        var m = AdventurerMapsHandler.createStructureMap(level, targetPos, getStructureHolder(level, structure),
                 getZoomLevel(tag), getDecoration(tag), getMapName(tag), getColor(tag));
+        if (original.hasCustomHoverName()) {
+            m.setHoverName(original.getHoverName());
+        }
+        return m;
     }
 
     @Override
