@@ -1,2 +1,2 @@
-fixed enderman head rendering
-fixed
+- fixed crash with faucet when trying to transfer to fluid handlers
+- fixed safe missing loot table
