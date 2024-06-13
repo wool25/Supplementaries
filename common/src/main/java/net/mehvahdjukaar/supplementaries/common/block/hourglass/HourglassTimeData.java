@@ -17,6 +17,7 @@ import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BannerBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,27 +29,13 @@ public class HourglassTimeData {
 
     public static final HourglassTimeData EMPTY = new HourglassTimeData(HolderSet.direct(), 0, 0, Optional.empty(), 99);
 
-    public static final Codec<HourglassTimeData> REGISTRY_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<HourglassTimeData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             RegistryCodecs.homogeneousList(Registries.ITEM).fieldOf("items").forGetter(p -> p.dusts),
             ExtraCodecs.POSITIVE_INT.fieldOf("duration").forGetter(p -> p.duration),
             StrOpt.of(Codec.intRange(0, 15), "light_level", 0).forGetter(p -> p.light),
             StrOpt.of(ResourceLocation.CODEC, "texture").forGetter(p -> p.texture),
             StrOpt.of(ExtraCodecs.POSITIVE_INT, "ordering", 0).forGetter(p -> p.ordering)
     ).apply(instance, HourglassTimeData::new));
-
-    public static final Codec<HourglassTimeData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ResourceLocation.CODEC.listOf().fieldOf("items").forGetter(p -> p.dusts.stream().map(h -> h.unwrapKey().get().location()).toList()),
-            ExtraCodecs.POSITIVE_INT.fieldOf("duration").forGetter(p -> p.duration),
-            StrOpt.of(Codec.intRange(0, 15), "light_level", 0).forGetter(p -> p.light),
-            StrOpt.of(ResourceLocation.CODEC, "texture").forGetter(p -> p.texture),
-            StrOpt.of(ExtraCodecs.POSITIVE_INT, "ordering", 0).forGetter(p -> p.ordering)
-    ).apply(instance, HourglassTimeData::createSafe));
-
-    private static HourglassTimeData createSafe(List<ResourceLocation> dusts, int dur, int light, Optional<ResourceLocation> texture, int order) {
-        List<Holder<Item>> holders = new ArrayList<>();
-        dusts.forEach(r -> BuiltInRegistries.ITEM.getHolder(ResourceKey.create(Registries.ITEM, r)).ifPresent(holders::add));
-        return new HourglassTimeData(HolderSet.direct(holders), dur, light, texture, order);
-    }
 
     private final HolderSet<Item> dusts;
     private final int duration;
